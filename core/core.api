@@ -1,6 +1,6 @@
 service core-api {
 	// 用户登录
-	@handler User
+	@handler UserLogin
 	post /user/login(LonginRequest) returns (loginReply)
 	
 	// 用户详情
@@ -11,7 +11,7 @@ service core-api {
 
 type LonginRequest {
 	Name     string `json:"name"`
-	Password string `json:"Password"`
+	Password string `json:"password"`
 }
 
 type loginReply {

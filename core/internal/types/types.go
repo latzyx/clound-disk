@@ -3,7 +3,7 @@ package types
 
 type LonginRequest struct {
 	Name     string `json:"name"`
-	Password string `json:"Password"`
+	Password string `json:"password"`
 }
 
 type LoginReply struct {
