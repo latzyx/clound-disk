@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-	"errors"
 
 	"cloud-disk/core/internal/svc"
 	"cloud-disk/core/internal/types"
@@ -29,12 +28,7 @@ func (l *UserDetailLogic) UserDetail(req *types.UserDetailRequest) (resp *types.
 	// todo: add your logic here and delete this line
 
 	resp = &types.UserDetailReply{}
-	ub := new(models.UserBasic)
-	has, err := models.Engine.Where("identity=?", req.Identity).Get(ub)
-	if !has {
-		return nil, errors.New("user is found")
-	}
-
+	ub, err := models.Select(req.Identity)
 	resp.Name = ub.Name
 	resp.Email = ub.Email
 	return

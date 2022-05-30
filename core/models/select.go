@@ -1,25 +1,15 @@
 package models
 
-import (
-	"bytes"
-	"encoding/json"
-	"log"
-)
+import "errors"
 
-func Select() string {
-	data := make([]*UserBasic, 0)
-	err := Engine.Find(&data)
+func Select(identity string) (*UserBasic, error) {
+	ub := new(UserBasic)
+	has, err := Engine.Where("identity=?", identity).Get(ub)
 	if err != nil {
-		log.Println("Get UserBasic Error:", err)
+		return &UserBasic{}, err
 	}
-	b, err := json.Marshal(data)
-	if err != nil {
-		log.Println("Marshal UserBasic Error:", err)
+	if !has {
+		return &UserBasic{}, errors.New("user is found")
 	}
-	dst := new(bytes.Buffer)
-	err = json.Indent(dst, b, "", "")
-	if err != nil {
-		log.Println("Indent UserBasic Error:", err)
-	}
-	return dst.String()
+	return &UserBasic{}, err
 }
