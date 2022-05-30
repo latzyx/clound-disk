@@ -1,6 +1,12 @@
 service core-api {
+	// 用户登录
 	@handler User
 	post /user/login(LonginRequest) returns (loginReply)
+	
+	// 用户详情
+	@handler UserDetail
+	get /user/detail(UserDetailRequest) returns(UserDetailReply)
+	
 }
 
 type LonginRequest {
@@ -10,4 +16,13 @@ type LonginRequest {
 
 type loginReply {
 	Token string `json:"token"`
+}
+
+type UserDetailRequest {
+	Identity string `json:"identity"`
+}
+
+type UserDetailReply {
+	Name  string `json:"name"`
+	Email string `json:"email"`
 }
