@@ -26,6 +26,6 @@ func NewUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserLogic {
 func (l *UserLogic) User(req *types.LonginRequest) (resp *types.LoginReply, err error) {
 	// todo: add your logic here and delete this line
 	resp = new(types.LoginReply)
-	resp.Token = models.QueryName(req.Name, req.Password)
+	err, resp.Token = models.QueryName(req.Name, req.Password)
 	return
 }
