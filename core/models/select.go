@@ -1,6 +1,8 @@
 package models
 
-import "errors"
+import (
+	"errors"
+)
 
 func Select(identity string) (*UserBasic, error) {
 	ub := new(UserBasic)
@@ -11,5 +13,5 @@ func Select(identity string) (*UserBasic, error) {
 	if !has {
 		return &UserBasic{}, errors.New("user is found")
 	}
-	return &UserBasic{}, err
+	return ub, err
 }

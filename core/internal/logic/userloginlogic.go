@@ -28,6 +28,7 @@ func (l *UserLoginLogic) UserLogin(req *types.LonginRequest) (resp *types.LoginR
 	// todo: add your logic here and delete this line
 
 	resp = new(types.LoginReply)
+	models.Select(req.Name)
 	err, resp.Token = models.QueryName(req.Name, req.Password)
 	return
 }

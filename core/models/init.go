@@ -10,8 +10,7 @@ import (
 var Engine = InInt()
 
 func InInt() *xorm.Engine {
-	s := "root:107827@zyx@tcp(127.0.0." +
-		"1:3306)/cloud_disk?charset=utf8mb4&parseTime=True&loc=Local"
+	s := "lazylast:lazy@ZYX1234!@tcp(175.178.94.46:3306)/cloud_disk?charset=utf8mb4&parseTime=True&loc=Local"
 	engine, err := xorm.NewEngine("mysql", s)
 	if err != nil {
 		log.Printf("Xrom New InInt Eroor:%v", err)
