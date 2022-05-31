@@ -8,6 +8,8 @@ require (
 	xorm.io/xorm v1.3.0
 )
 
+require github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible // indirect
+
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
