@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 
+	"cloud-disk/core/helper"
 	"cloud-disk/core/internal/svc"
 	"cloud-disk/core/internal/types"
 
@@ -25,6 +26,9 @@ func NewMailCodeSendLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Mail
 
 func (l *MailCodeSendLogic) MailCodeSend(req *types.MailCodeSendRequest) (resp *types.MailCodeSendReply, err error) {
 	// todo: add your logic here and delete this line
-
+	err = helper.MailSendCode(req.Email, "123456")
+	if err != nil {
+		return nil, err
+	}
 	return
 }
