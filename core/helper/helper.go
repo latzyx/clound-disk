@@ -5,7 +5,9 @@ import (
 	"crypto/md5"
 	"crypto/tls"
 	"fmt"
+	"math/rand"
 	"net/smtp"
+	"time"
 
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/jordan-wright/email"
@@ -43,4 +45,10 @@ func MailSendCode(mail, code string) error {
 		return err
 	}
 	return nil
+}
+
+func MailCode() string {
+	s := fmt.Sprintf("%06v", rand.New(rand.NewSource(time.Now().UnixNano())).Int63n(100000))
+
+	return s
 }

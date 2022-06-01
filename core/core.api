@@ -35,4 +35,5 @@ type MailCodeSendRequest {
 	Email string `json:"email"`
 }
 
-type  MailCodeSendReply {}
+type MailCodeSendReply {
+}
