@@ -26,7 +26,8 @@ func NewMailCodeSendLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Mail
 
 func (l *MailCodeSendLogic) MailCodeSend(req *types.MailCodeSendRequest) (resp *types.MailCodeSendReply, err error) {
 	// todo: add your logic here and delete this line
-	err = helper.MailSendCode(req.Email)
+	s := helper.MailCode()
+	err = helper.MailSendCode(req.Email, s)
 	if err != nil {
 		return nil, err
 	}
