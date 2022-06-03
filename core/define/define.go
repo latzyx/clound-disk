@@ -12,3 +12,5 @@ type UserClaim struct {
 var JwtKey = "cloud-disk-key"
 
 var MailPassword = "jwficgnyahwsiefg"
+
+var CodeExpire = 300

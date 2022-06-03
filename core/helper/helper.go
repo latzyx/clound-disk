@@ -49,6 +49,5 @@ func MailSendCode(mail string, code string) error {
 
 func MailCode() string {
 	s := fmt.Sprintf("%06v", rand.New(rand.NewSource(time.Now().UnixNano())).Int63n(100000))
-
 	return s
 }

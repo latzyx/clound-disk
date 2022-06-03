@@ -11,6 +11,34 @@ service core-api {
 	@handler MailCodeSend
 	get /mail/code/send(MailCodeSendRequest) returns(MailCodeSendReply)
 	
+	// 用户注册
+	@handler UserRegister
+	post /user/register(UserRegisterRequest) returns(UserRegisterReply)
+	
+}
+
+type UserRegisterRequest {
+	// 用户名
+	Name string `json:"name"`
+	// 密码
+	Password string `json:"password"`
+	// 邮箱
+	Mail string `json:"mail"`
+	// 验证码
+	Code string `json:"code"`
+}
+
+type UserRegisterReply {
+	// 用户id
+	Id int64 `json:"id"`
+	// 用户名
+	Name string `json:"name"`
+	// 邮箱
+	Mail string `json:"mail"`
+	// 是否成功
+	Success bool `json:"success"`
+	// 错误信息
+	Error string `json:"error"`
 }
 
 type LonginRequest {
