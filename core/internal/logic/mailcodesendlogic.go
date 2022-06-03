@@ -2,10 +2,8 @@ package logic
 
 import (
 	"context"
-	"errors"
-	"time"
+	"fmt"
 
-	"cloud-disk/core/define"
 	"cloud-disk/core/helper"
 	"cloud-disk/core/internal/svc"
 	"cloud-disk/core/internal/types"
@@ -30,17 +28,8 @@ func NewMailCodeSendLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Mail
 
 func (l *MailCodeSendLogic) MailCodeSend(req *types.MailCodeSendRequest) (resp *types.MailCodeSendReply, err error) {
 	// todo: add your logic here and delete this line
-	i, err := models.Engine.Where("email=?", req.Email).Count(new(models.UserBasic))
-	if err != nil {
-		return nil, err
-	}
-	if i > 0 {
-		err = errors.New("该邮箱已被注册")
-		return
-	}
-	code := helper.MailCode()
-	models.RDB.Set(req.Email, code, time.Second*time.Duration(define.CodeExpire))
-	err = helper.MailSendCode(req.Email, code)
+
+	err = helper.MailSendCode(req.Email, fmt.Sprint(models.ValiDationEmail(req.Email)))
 	if err != nil {
 		return nil, err
 	}
