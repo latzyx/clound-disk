@@ -10,7 +10,10 @@ require (
 
 require github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
 
-require github.com/onsi/gomega v1.18.1 // indirect
+require (
+	github.com/imdario/mergo v0.3.13 // indirect
+	github.com/onsi/gomega v1.18.1 // indirect
+)
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
