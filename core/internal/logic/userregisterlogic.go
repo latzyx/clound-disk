@@ -2,11 +2,8 @@ package logic
 
 import (
 	"context"
-	"errors"
 	"log"
-	"time"
 
-	"cloud-disk/core/helper"
 	"cloud-disk/core/internal/svc"
 	"cloud-disk/core/internal/types"
 	"cloud-disk/core/models"
@@ -29,38 +26,15 @@ func NewUserRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *User
 }
 
 func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterRequest) (resp *types.UserRegisterReply, err error) {
-	// 判断Code 验证码是否一致
-	code, err := models.RDB.Get(req.Mail).Result()
-	if err != nil {
-		return nil, err
-	}
-	if code != req.Code {
-		err = errors.New("验证码错误")
-		return
-	}
-	// 判断用户名是否存在
-	i, err := models.Engine.Where("name=?", req.Name).Count(new(models.UserBasic))
-	if err != nil {
-		return nil, err
-	}
-	if i > 0 {
-		err = errors.New("用户名已存在")
-		return
-	}
-	// 数据入库
 	user := &models.UserBasic{
-		Identity:  helper.GetUUID(),
-		Name:      req.Name,
-		Email:     req.Mail,
-		Password:  helper.Md5(req.Password),
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
+		Name:     req.Name,
+		Password: req.Password,
+		Email:    req.Mail,
 	}
-
-	i2, err := models.Engine.Insert(user)
+	err, ub := models.UserRegister(user, req.Code)
+	log.Println("req is", ub)
 	if err != nil {
 		return nil, err
 	}
-	log.Println(i2)
 	return
 }
