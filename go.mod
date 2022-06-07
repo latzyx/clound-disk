@@ -11,8 +11,13 @@ require (
 require github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
 
 require (
+	github.com/clbanning/mxj v1.8.4 // indirect
+	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/imdario/mergo v0.3.13 // indirect
+	github.com/mitchellh/mapstructure v1.5.0 // indirect
+	github.com/mozillazg/go-httpheader v0.3.1 // indirect
 	github.com/onsi/gomega v1.18.1 // indirect
+	github.com/tencentyun/cos-go-sdk-v5 v0.7.35 // indirect
 )
 
 require (
