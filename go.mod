@@ -18,6 +18,7 @@ require (
 	github.com/mozillazg/go-httpheader v0.3.1 // indirect
 	github.com/onsi/gomega v1.18.1 // indirect
 	github.com/tencentyun/cos-go-sdk-v5 v0.7.35 // indirect
+	gopkg.in/yaml.v3 v3.0.0 // indirect
 )
 
 require (

@@ -23,7 +23,7 @@ func InInt() *xorm.Engine {
 func InintRedis() *redis.Client {
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     "175.178.94.46:6379",
-		Password: "lazy@ZYX1234!", // no password set
+		Password: "000415", // no password set
 		DB:       0,
 	})
 	return rdb
