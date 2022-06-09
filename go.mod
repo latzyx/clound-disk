@@ -8,16 +8,17 @@ require (
 	xorm.io/xorm v1.3.0
 )
 
-require github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
+require (
+	github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
+	github.com/tencentyun/cos-go-sdk-v5 v0.7.35
+)
 
 require (
 	github.com/clbanning/mxj v1.8.4 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/imdario/mergo v0.3.13 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/mozillazg/go-httpheader v0.3.1 // indirect
 	github.com/onsi/gomega v1.18.1 // indirect
-	github.com/tencentyun/cos-go-sdk-v5 v0.7.35 // indirect
 	gopkg.in/yaml.v3 v3.0.0 // indirect
 )
 
@@ -31,7 +32,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.2.0
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
-	github.com/google/uuid v1.3.0 // indirect
+	github.com/google/uuid v1.3.0
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/justinas/alice v1.2.0 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.2-0.20181231171920-c182affec369 // indirect

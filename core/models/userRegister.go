@@ -10,9 +10,6 @@ import (
 func UserRegister(u *UserBasic, code string) (error, *UserBasic) {
 	// 判断Code 验证码是否一致
 	c, err := RDB.Get(u.Email).Result()
-	log.Println("redis is err", c)
-	log.Println("redis is err", u)
-	log.Println("redis is err", code)
 	if err != nil {
 		return err, nil
 	}
