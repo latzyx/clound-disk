@@ -9,5 +9,6 @@ import (
 
 func TestUUid(t *testing.T) {
 	uuid := uuid.New().String()
+	uuid = "0"
 	fmt.Print(uuid)
 }
