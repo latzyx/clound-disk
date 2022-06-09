@@ -13,8 +13,8 @@ var ctx = context.Background()
 
 var rdb = redis.NewClient(&redis.Options{
 	Addr:     "175.178.94.46:6379",
-	Password: "lazy@ZYX1234!", // no password set
-	DB:       0,               // use default DB
+	Password: "000415", // no password set
+	DB:       0,        // use default DB
 })
 
 func TestRedis(t *testing.T) {
