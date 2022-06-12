@@ -2,16 +2,21 @@ package helper
 
 import (
 	"cloud-disk/core/define"
+	"context"
 	"crypto/md5"
 	"crypto/tls"
 	"fmt"
 	"math/rand"
+	"net/http"
 	"net/smtp"
+	"net/url"
+	"path"
 	"time"
 
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/google/uuid"
 	"github.com/jordan-wright/email"
+	"github.com/tencentyun/cos-go-sdk-v5"
 )
 
 func Md5(s string) string {
@@ -54,4 +59,26 @@ func MailCode() string {
 }
 func GetUUID() string {
 	return uuid.New().String()
+}
+
+func CosUpload(r *http.Request) (string, error) {
+	u, _ := url.Parse(define.Url)
+	b := &cos.BaseURL{BucketURL: u}
+	client := cos.NewClient(b, &http.Client{
+		Transport: &cos.AuthorizationTransport{
+			// 通过环境变量获取密钥
+			// 环境变量 SECRETID 表示用户的 SecretId，登录访问管理控制台查看密钥，https://console.cloud.tencent.com/cam/capi
+			SecretID: define.SECRETID,
+			// 环境变量 SECRETKEY 表示用户的 SecretKey，登录访问管理控制台查看密钥，https://console.cloud.tencent.com/cam/capi
+			SecretKey: define.SecretKey,
+		},
+	})
+	file, fileHeader, err := r.FormFile("file")
+	key := "cloud-disk/" + GetUUID() + path.Ext(fileHeader.Filename)
+	_, err = client.Object.Put(context.Background(), key, file, nil)
+	if err != nil {
+		panic(err)
+	}
+	return define.Url + "/" + key, nil
+
 }

@@ -3,8 +3,10 @@ package logic
 import (
 	"context"
 
+	"cloud-disk/core/helper"
 	"cloud-disk/core/internal/svc"
 	"cloud-disk/core/internal/types"
+	"cloud-disk/core/models"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,6 +27,18 @@ func NewFileUploadLogic(ctx context.Context, svcCtx *svc.ServiceContext) *FileUp
 
 func (l *FileUploadLogic) FileUpload(req *types.FileUploadRequest) (resp *types.FileUploadReply, err error) {
 	// todo: add your logic here and delete this line
-
+	rp := &models.RepositoryPool{
+		Identity: helper.GetUUID(),
+		Hash:     req.Hash,
+		Name:     req.Name,
+		Ext:      req.Ext,
+		Path:     req.Path,
+	}
+	_, err = models.Engine.Insert(rp)
+	if err != nil {
+		return nil, err
+	}
+	resp = new(types.FileUploadReply)
+	resp.Identity = rp.Identity
 	return
 }
