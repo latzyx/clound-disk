@@ -1,13 +1,12 @@
 package logic
 
 import (
-	"context"
-
 	"cloud-disk/core/helper"
 	"cloud-disk/core/internal/svc"
 	"cloud-disk/core/internal/types"
 	"cloud-disk/core/models"
-
+	"context"
+	"fmt"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -34,11 +33,15 @@ func (l *FileUploadLogic) FileUpload(req *types.FileUploadRequest) (resp *types.
 		Ext:      req.Ext,
 		Path:     req.Path,
 	}
+	fmt.Println(rp.Identity)
 	_, err = models.Engine.Insert(rp)
 	if err != nil {
 		return nil, err
 	}
 	resp = new(types.FileUploadReply)
+	fmt.Println(resp.Identity)
 	resp.Identity = rp.Identity
+	fmt.Println("resp", resp.Identity)
+	fmt.Println(resp)
 	return
 }
