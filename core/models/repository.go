@@ -12,7 +12,7 @@ type RepositoryPool struct {
 	Path      string
 	CreatedAt time.Time `xorm:"created_at"`
 	UpdatedAt time.Time `xorm:"updated_at"`
-	DeletedAt time.Time `xorm:"deleted_at"`
+	DeleteAt  time.Time `xorm:"deleted_at"`
 }
 
 func (table RepositoryPool) TableName() string {

@@ -8,6 +8,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/zeromicro/go-zero/core/logx"
+	"time"
 )
 
 type FileUploadLogic struct {
@@ -27,11 +28,12 @@ func NewFileUploadLogic(ctx context.Context, svcCtx *svc.ServiceContext) *FileUp
 func (l *FileUploadLogic) FileUpload(req *types.FileUploadRequest) (resp *types.FileUploadReply, err error) {
 	// todo: add your logic here and delete this line
 	rp := &models.RepositoryPool{
-		Identity: helper.GetUUID(),
-		Hash:     req.Hash,
-		Name:     req.Name,
-		Ext:      req.Ext,
-		Path:     req.Path,
+		Identity:  helper.GetUUID(),
+		Hash:      req.Hash,
+		Name:      req.Name,
+		Ext:       req.Ext,
+		Path:      req.Path,
+		CreatedAt: time.Now(),
 	}
 	fmt.Println(rp.Identity)
 	_, err = models.Engine.Insert(rp)

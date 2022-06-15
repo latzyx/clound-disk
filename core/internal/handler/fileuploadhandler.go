@@ -38,8 +38,9 @@ func FileUploadHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		if err != nil {
 			return
 		}
-		if !has {
+		if has {
 			httpx.OkJson(w, &types.FileUploadReply{Identity: rp.Identity})
+			return
 		}
 		// 往cos中存储文件
 		s, err := helper.CosUpload(r)
