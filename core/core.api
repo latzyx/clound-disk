@@ -1,89 +1,107 @@
 service core-api {
-	// 用户登录
-	@handler UserLogin
-	post /user/login(LonginRequest) returns (loginReply)
-	
-	// 用户详情
-	@handler UserDetail
-	get /user/detail(UserDetailRequest) returns(UserDetailReply)
-	
-	// 验证码发送
-	@handler MailCodeSend
-	get /mail/code/send(MailCodeSendRequest) returns(MailCodeSendReply)
-	
-	// 用户注册
-	@handler UserRegister
-	post /user/register(UserRegisterRequest) returns(UserRegisterReply)
-	
+    // 用户登录
+    @handler UserLogin
+    post /user/login (LonginRequest) returns (loginReply)
+
+    // 用户详情
+    @handler UserDetail
+    get /user/detail (UserDetailRequest) returns (UserDetailReply)
+
+    // 验证码发送
+    @handler MailCodeSend
+    get /mail/code/send (MailCodeSendRequest) returns (MailCodeSendReply)
+
+    // 用户注册
+    @handler UserRegister
+    post /user/register (UserRegisterRequest) returns (UserRegisterReply)
 }
 
 @server(
-	middleware : Auth
-	
+    middleware : Auth
 )
 service core-api {
-	// 文件上传
-	@handler FileUpload
-	post /file/upload(FileUploadRequest) returns(FileUploadReply)
+    // 文件上传
+    @handler FileUpload
+    post /file/upload (FileUploadRequest) returns (FileUploadReply)
+
+
+    @handler UserRepostitorySave
+    post /user/repository/save (UserRepostitorySaveRequest) returns (UserRepostitorySaveReply)
+
 }
 
+type  UserRepostitorySaveRequest{
+ParentId int `json:"parentId"`
+Repository_identity string `json:"repositoryIdentity"`
+Ext string `json:"ext"`
+Name string `json:"name"`
+
+}
+type  UserRepostitorySaveReply{
+
+}
+
+
+
 type UserRegisterRequest {
-	// 用户名
-	Name string `json:"name"`
-	// 密码
-	Password string `json:"password"`
-	// 邮箱
-	Mail string `json:"mail"`
-	// 验证码
-	Code string `json:"code"`
+    // 用户名
+    Name string `json:"name"`
+    // 密码
+    Password string `json:"password"`
+    // 邮箱
+    Mail string `json:"mail"`
+    // 验证码
+    Code string `json:"code"`
 }
 
 type UserRegisterReply {
-	// 用户id
-	Id int64 `json:"id"`
-	// 用户名
-	Name string `json:"name"`
-	// 邮箱
-	Mail string `json:"mail"`
-	// 是否成功
-	Success bool `json:"success"`
-	// 错误信息
-	Error string `json:"error"`
+    // 用户id
+    Id int64 `json:"id"`
+    // 用户名
+    Name string `json:"name"`
+    // 邮箱
+    Mail string `json:"mail"`
+    // 是否成功
+    Success bool `json:"success"`
+    // 错误信息
+    Error string `json:"error"`
 }
 
 type LonginRequest {
-	Name     string `json:"name"`
-	Password string `json:"password"`
+    Name string `json:"name"`
+    Password string `json:"password"`
 }
 
 type loginReply {
-	Token string `json:"token"`
+    Token string `json:"token"`
 }
 
 type UserDetailRequest {
-	Identity string `json:"identity"`
+    Identity string `json:"identity"`
 }
 
 type UserDetailReply {
-	Name  string `json:"name"`
-	Email string `json:"email"`
+    Name string `json:"name"`
+    Email string `json:"email"`
 }
 
 type MailCodeSendRequest {
-	Email string `json:"email"`
+    Email string `json:"email"`
 }
 
 type MailCodeSendReply {
 }
 
 type FileUploadRequest {
-	Hash string `json:"hash,optional"`
-	Name string `json:"name,optional"`
-	Ext  string `json:"ext,optional"`
-	Size string `json:"size,optional"`
-	Path string `json:"path,optional"`
+    Hash string `json:"hash,optional"`
+    Name string `json:"name,optional"`
+    Ext string `json:"ext,optional"`
+    Size string `json:"size,optional"`
+    Path string `json:"path,optional"`
 }
 
 type FileUploadReply {
-	Identity string `json:"identity"`
+    Identity string `json:"identity"`
+    Ext string `json:"ext"`
+    Name string `json:"name"`
 }
