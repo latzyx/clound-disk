@@ -16,9 +16,6 @@ service core-api {
 	post /user/register (UserRegisterRequest) returns (UserRegisterReply)
 }
 
-@server(
-	middleware : Auth
-)
 service core-api {
 	// 文件上传
 	@handler FileUpload

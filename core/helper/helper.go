@@ -1,6 +1,7 @@
 package helper
 
 import (
+	"cloud-disk/core/define"
 	"context"
 	"crypto/md5"
 	"crypto/tls"
@@ -12,8 +13,6 @@ import (
 	"net/url"
 	"path"
 	"time"
-
-	"cloud-disk/core/define"
 
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/google/uuid"
@@ -62,7 +61,7 @@ func AnalyzeToken(token string) (*define.UserClaim, error) {
 func MailSendCode(mail string, code string) error {
 	e := email.NewEmail()
 	e.From = "Get <name-zyx@foxmail.com>"
-	e.To = []string{"2669738224@qq.com"}
+	e.To = []string{mail}
 	e.Subject = "验证码发送"
 	e.HTML = []byte("你的验证码为:<h1>" + code + "</h1>")
 	err := e.SendWithTLS(

@@ -4,6 +4,9 @@
 # Vsocde project files
 .vsocde
 
+#define
+/define/
+
 # IntelliJ project files
 .idea
 *.iml
